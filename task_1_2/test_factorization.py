@@ -57,9 +57,16 @@ def test_one():
     except ValueError:
         pass
 
+def test_float_argument():
+    try:
+        result = prime_factors(2.5)
+        assert False, f'Expected ValueError, got {result}'
+    except TypeError:
+        pass
+
 test_cases = (test_factorization_import, test_result_is_a_list, test_number_is_prime, test_number_is_not_prime,
               test_number_with_same_factors, test_number_with_different_factors, test_big_number,
-              test_negative_number, test_zero, test_one)
+              test_negative_number, test_zero, test_one, test_float_argument)
 
 if __name__ == '__main__':
     for test in test_cases:

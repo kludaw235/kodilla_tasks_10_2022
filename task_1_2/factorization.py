@@ -1,6 +1,8 @@
 def prime_factors(number):
     if number <= 1:
         raise ValueError
+    elif type(number) is float:
+        raise TypeError
 
     factors = []
     i = 1
