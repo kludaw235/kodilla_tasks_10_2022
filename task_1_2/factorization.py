@@ -1,6 +1,7 @@
 def prime_factors(number):
+    if number < 0:
+        raise ValueError
     factors = []
-    # for i in range(1, number+1):
     i = 0
     while True:
         i += 1
