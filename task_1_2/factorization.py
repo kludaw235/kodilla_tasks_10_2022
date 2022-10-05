@@ -1,5 +1,5 @@
 def prime_factors(number):
-    if number < 0:
+    if number <= 1:
         raise ValueError
     factors = []
     i = 0
