@@ -31,8 +31,13 @@ def test_number_with_different_factors():
     expected = [2, 2, 2, 3]
     assert result == expected, f'Expected {expected}, got {result}'
 
+def test_big_number():
+    result = prime_factors(3958159172)
+    expected = [2, 2, 11, 2347, 38329]
+    assert result == expected, f'Expected {expected}, got {result}'
+
 test_cases = (test_factorization_import, test_result_is_a_list, test_number_is_prime, test_number_is_not_prime,
-              test_number_with_same_factors, test_number_with_different_factors)
+              test_number_with_same_factors, test_number_with_different_factors, test_big_number)
 
 if __name__ == '__main__':
     for test in test_cases:
