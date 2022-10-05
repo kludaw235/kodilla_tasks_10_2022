@@ -11,10 +11,18 @@ def test_result_is_a_list():
     result = prime_factors(2)
     assert type(result) is list, "Result is not a list"
 
+def test_number_is_prime():
+    result = prime_factors(11)
+    expected = [11]
+    assert result == expected, f"Expected {expected}, got {result}"
+
+def test_number_is_not_prime():
+    result = prime_factors(12)
+    expected_not = [12]
+    assert result != expected_not, f"Expected not {expected_not}, got {result}"
 
 
-
-test_cases = (test_factorization_import, test_result_is_a_list)
+test_cases = (test_factorization_import, test_result_is_a_list, test_number_is_prime, test_number_is_not_prime)
 
 if __name__ == '__main__':
     for test in test_cases:
