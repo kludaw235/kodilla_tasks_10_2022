@@ -13,3 +13,7 @@ def test_3args_validation():
         NSC("ROM", "DEC", "IV")
     except Exception as e:
         assert False, f"3 arguments raised an exception: {e}"
+
+def test_rom_to_dec_returns_int():
+    assert isinstance(NSC("ROM", "DEC", "IV").target_number, int)
+
