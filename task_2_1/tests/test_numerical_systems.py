@@ -32,3 +32,19 @@ class TestRomToDecSmallNums:
 
     def test_5(self):
         assert NSC('ROM', 'DEC', 'XXIX').target_number == 29
+
+class TestRomToDecGreatNums:
+    def test_1(self):
+        assert NSC('ROM', 'DEC', 'MDCLXV').target_number == 1665
+
+    def test_2(self):
+        assert NSC('ROM', 'DEC', 'MMMMDCCCXXXIX').target_number == 4839
+
+    def test_3(self):
+        assert NSC('ROM', 'DEC', 'MMMDCCCLXXXVIII').target_number == 3888
+
+    def test_4(self):
+        assert NSC('ROM', 'DEC', 'MMDCCLXXVIII').target_number == 2778
+
+    def test_5(self):
+        assert NSC('ROM', 'DEC', 'CMXCIX').target_number == 999
