@@ -17,3 +17,18 @@ def test_3args_validation():
 def test_rom_to_dec_returns_int():
     assert isinstance(NSC("ROM", "DEC", "IV").target_number, int)
 
+class TestRomToDecSmallNums:
+    def test_1(self):
+        assert NSC('ROM', 'DEC', 'IV').target_number == 4
+
+    def test_2(self):
+        assert NSC('ROM', 'DEC', 'XXIV').target_number == 24
+
+    def test_3(self):
+        assert NSC('ROM', 'DEC', 'XXXVI').target_number == 36
+
+    def test_4(self):
+        assert NSC('ROM', 'DEC', 'XIIIIII').target_number == 16
+
+    def test_5(self):
+        assert NSC('ROM', 'DEC', 'XXIX').target_number == 29
