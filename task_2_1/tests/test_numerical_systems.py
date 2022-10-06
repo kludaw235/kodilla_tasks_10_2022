@@ -62,3 +62,37 @@ class TestSingleAppearDLV:
     def test_single_appear_V(self):
         with pytest.raises(ValueError):
             print(NSC('ROM', 'DEC', 'VVVI').target_number)
+
+class TestSmallerDenominationsAsMCX:
+    def test_smaller_equal_M(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'CCCCCCCCCC').target_number)
+
+    def test_smaller_exceed_M(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'CCCCCCCCCCC').target_number)
+
+    def test_smaller_correct_M(self):
+        assert NSC('ROM', 'DEC', 'CCCCCCCCC').target_number == 900
+
+    def test_smaller_equal_C(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'XXXXXXXXXX').target_number)
+
+    def test_smaller_exceed_C(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'XXXXXXXXXXX').target_number)
+
+    def test_smaller_correct_C(self):
+        assert NSC('ROM', 'DEC', 'XXXXXXXXX').target_number == 90
+
+    def test_smaller_equal_X(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'IIIIIIIIII').target_number)
+
+    def test_smaller_exceed_X(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'IIIIIIIIIII').target_number)
+
+    def test_smaller_correct_X(self):
+        assert NSC('ROM', 'DEC', 'IIIIIIIII').target_number == 9

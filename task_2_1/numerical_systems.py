@@ -23,9 +23,16 @@ class NumericalSystemsConverter:
             if rom_list.count(num) > 1:
                 raise ValueError()
 
+        def is_valid_denomination(num):
+            if rom_list.count(num) >= 10:
+                raise ValueError()
+
         rom_list = list(self.number)
         for i in ("D", "L", "V"):
             is_appearing_once(i)
+
+        for i in ("C", "X", "I"):
+            is_valid_denomination(i)
 
 
     def rom_to_dec(self):
