@@ -11,22 +11,26 @@ rom_to_dec_dict = \
 
 class NumericalSystemsConverter:
     def __init__(self, source_system, target_system, number):
+        self.number = number
         self.target_number = 0
 
         if source_system == "ROM" and target_system == "DEC":
-            self.rom_to_dec(number)
+            self.rom_to_dec()
 
-    def validate_rom(self, rom_list):
-        if rom_list.count("D") > 1:
-            raise ValueError()
-        if rom_list.count("L") > 1:
-            raise ValueError()
-        if rom_list.count("V") > 1:
-            raise ValueError()
+    def validate_rom(self):
 
-    def rom_to_dec(self, number):
-        rom_number_list = list(number)
-        self.validate_rom(rom_number_list)
+        def is_appearing_once(num):
+            if rom_list.count(num) > 1:
+                raise ValueError()
+
+        rom_list = list(self.number)
+        for i in ("D", "L", "V"):
+            is_appearing_once(i)
+
+
+    def rom_to_dec(self):
+        rom_number_list = list(self.number)
+        self.validate_rom()
         temp_number = 0
         for r in reversed(rom_number_list):
             prev_temp_number = temp_number
