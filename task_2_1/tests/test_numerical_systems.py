@@ -48,3 +48,17 @@ class TestRomToDecGreatNums:
 
     def test_5(self):
         assert NSC('ROM', 'DEC', 'CMXCIX').target_number == 999
+
+
+class TestSingleAppearDLV:
+    def test_single_appear_D(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'MDDLX').target_number)
+
+    def test_single_appear_L(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'MDLLX').target_number)
+
+    def test_single_appear_V(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'VVVI').target_number)
