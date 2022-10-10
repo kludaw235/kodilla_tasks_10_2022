@@ -34,6 +34,16 @@ class NumericalSystemsConverter:
         for i in ("C", "X", "I"):
             is_valid_denomination(i)
 
+        for idx, value in enumerate(rom_list[:-1]):
+            if value == "I":
+                if rom_list[idx + 1] in ['M', 'D', 'C', 'L']:
+                    raise ValueError()
+            elif value == "X":
+                print(idx)
+                if rom_list[idx + 1] in ['M', 'D']:
+                    raise ValueError()
+
+
 
     def rom_to_dec(self):
         rom_number_list = list(self.number)
@@ -48,4 +58,5 @@ class NumericalSystemsConverter:
                 self.target_number -= temp_number
 
 if __name__ == '__main__':
-    x = NumericalSystemsConverter('ROM', 'DEC', 'XXXVI').target_number
+    x = NumericalSystemsConverter('ROM', 'DEC', 'MMMMDCCCXXXIX').target_number
+    print(x)
