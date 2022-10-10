@@ -122,3 +122,18 @@ class TestSubLeadingNumsIXC:
         expected_results = [900, 400, 200, 150, 110, 105, 101]
         for i in range(len(self.inputs)):
             self.check_result('C' + self.inputs[i], expected_results[i])
+
+    def test_single_sub_leading_I(self):
+        for i in range(len(self.inputs) - 1):
+            with pytest.raises(ValueError):
+                print(NSC('ROM', 'DEC', 'II' + self.inputs[i]).target_number)
+
+    def test_single_sub_leading_X(self):
+        for i in range(len(self.inputs) - 3):
+            with pytest.raises(ValueError):
+                print(NSC('ROM', 'DEC', 'XX' + self.inputs[i]).target_number)
+
+    def test_single_sub_leading_C(self):
+        for i in range(len(self.inputs) - 5):
+            with pytest.raises(ValueError):
+                print(NSC('ROM', 'DEC', 'CC' + self.inputs[i]).target_number)

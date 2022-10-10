@@ -38,10 +38,32 @@ class NumericalSystemsConverter:
             if value == "I":
                 if rom_list[idx + 1] in ['M', 'D', 'C', 'L']:
                     raise ValueError()
+                elif rom_list[idx + 1] == 'I':
+                    try:
+                        if rom_list[idx + 2] in ['M', 'D', 'C', 'L', 'X', 'V']:
+                            raise ValueError()
+                    except IndexError:
+                        pass
             elif value == "X":
-                print(idx)
                 if rom_list[idx + 1] in ['M', 'D']:
                     raise ValueError()
+                elif rom_list[idx + 1] == 'X':
+                    try:
+                        if rom_list[idx + 2] in ['M', 'D', 'C', 'L']:
+                            raise ValueError()
+                    except IndexError:
+                        pass
+            elif value == "C":
+                if rom_list[idx + 1] == 'C':
+                    try:
+                        if rom_list[idx + 2] in ['M', 'D']:
+                            raise ValueError()
+                    except IndexError:
+                        pass
+
+
+
+
 
 
 
@@ -58,5 +80,5 @@ class NumericalSystemsConverter:
                 self.target_number -= temp_number
 
 if __name__ == '__main__':
-    x = NumericalSystemsConverter('ROM', 'DEC', 'MMMMDCCCXXXIX').target_number
+    x = NumericalSystemsConverter('ROM', 'DEC', 'IIV').target_number
     print(x)
