@@ -157,3 +157,6 @@ class TestSubLeadingNumsIXC:
 
     def test_small_letters(self):
         assert NSC('ROM', 'DEC', 'mdclxvi').target_number == 1666
+
+    def test_dec_to_rom_target_str(self):
+        assert isinstance(NSC('DEC', 'ROM', 4).target_number, str)

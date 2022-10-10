@@ -15,6 +15,8 @@ class NumericalSystemsConverter:
 
         if source_system == "ROM" and target_system == "DEC":
             self.rom_to_dec()
+        elif source_system == "DEC" and target_system == "ROM":
+            self.dec_to_rom()
 
     def validate_rom(self):
         def validate_small_letters():
@@ -66,6 +68,9 @@ class NumericalSystemsConverter:
                 self.target_number += temp_number
             else:
                 self.target_number -= temp_number
+
+    def dec_to_rom(self):
+        self.target_number = str(self.number)
 
 if __name__ == '__main__':
     x = NumericalSystemsConverter('ROM', 'DEC', 'mdclxvi').target_number
