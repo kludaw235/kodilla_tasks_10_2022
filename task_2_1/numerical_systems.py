@@ -17,6 +17,9 @@ class NumericalSystemsConverter:
             self.rom_to_dec()
 
     def validate_rom(self):
+        def validate_small_letters():
+            self.number = self.number.upper()
+
         def is_appearing_once(num):
             if rom_list.count(num) > 1:
                 raise ValueError()
@@ -36,7 +39,9 @@ class NumericalSystemsConverter:
                 else:
                     counter = 0
 
+        validate_small_letters()
         rom_list = list(self.number)
+
         for i in ("D", "L", "V"):
             is_appearing_once(i)
 
@@ -51,8 +56,8 @@ class NumericalSystemsConverter:
         is_valid_substraction("D", ['M', None, None])
 
     def rom_to_dec(self):
-        rom_number_list = list(self.number)
         self.validate_rom()
+        rom_number_list = list(self.number)
         temp_number = 0
         for r in reversed(rom_number_list):
             prev_temp_number = temp_number
@@ -63,5 +68,5 @@ class NumericalSystemsConverter:
                 self.target_number -= temp_number
 
 if __name__ == '__main__':
-    x = NumericalSystemsConverter('ROM', 'DEC', 'IVX').target_number
+    x = NumericalSystemsConverter('ROM', 'DEC', 'mdclxvi').target_number
     print(x)
