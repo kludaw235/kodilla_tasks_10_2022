@@ -27,6 +27,18 @@ class NumericalSystemsConverter:
             if rom_list.count(num) >= 10:
                 raise ValueError()
 
+        def is_valid_substraction(value_checked, forbidden_pre_values):
+            counter = 0
+            for idx, val in enumerate(rom_list[:-1]):
+                if val == value_checked:
+                    counter += 1
+                    if (rom_list[idx + 1] in forbidden_pre_values[:-2]) or \
+                            (counter > 1 and rom_list[idx + 1] in forbidden_pre_values):
+                        raise ValueError()
+                else:
+                    counter = 0
+
+
         rom_list = list(self.number)
         for i in ("D", "L", "V"):
             is_appearing_once(i)
@@ -34,33 +46,9 @@ class NumericalSystemsConverter:
         for i in ("C", "X", "I"):
             is_valid_denomination(i)
 
-        for idx, value in enumerate(rom_list[:-1]):
-            if value == "I":
-                if rom_list[idx + 1] in ['M', 'D', 'C', 'L']:
-                    raise ValueError()
-                elif rom_list[idx + 1] == 'I':
-                    try:
-                        if rom_list[idx + 2] in ['M', 'D', 'C', 'L', 'X', 'V']:
-                            raise ValueError()
-                    except IndexError:
-                        pass
-            elif value == "X":
-                if rom_list[idx + 1] in ['M', 'D']:
-                    raise ValueError()
-                elif rom_list[idx + 1] == 'X':
-                    try:
-                        if rom_list[idx + 2] in ['M', 'D', 'C', 'L']:
-                            raise ValueError()
-                    except IndexError:
-                        pass
-            elif value == "C":
-                if rom_list[idx + 1] == 'C':
-                    try:
-                        if rom_list[idx + 2] in ['M', 'D']:
-                            raise ValueError()
-                    except IndexError:
-                        pass
-
+        is_valid_substraction("I", ['M', 'D', 'C', 'L', 'X', 'V'])
+        is_valid_substraction("X", ['M', 'D', 'C', 'L'])
+        is_valid_substraction("C", ['M', 'D'])
 
 
 
