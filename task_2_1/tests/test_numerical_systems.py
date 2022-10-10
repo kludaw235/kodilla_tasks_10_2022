@@ -137,3 +137,20 @@ class TestSubLeadingNumsIXC:
         for i in range(len(self.inputs) - 5):
             with pytest.raises(ValueError):
                 print(NSC('ROM', 'DEC', 'CC' + self.inputs[i]).target_number)
+
+    class TestDescendingOrder:
+        def test_1(self):
+            with pytest.raises(ValueError):
+                print(NSC('ROM', 'DEC', 'IVX').target_number)
+
+        def test_2(self):
+            with pytest.raises(ValueError):
+                print(NSC('ROM', 'DEC', 'XLC').target_number)
+
+        def test_3(self):
+            with pytest.raises(ValueError):
+                print(NSC('ROM', 'DEC', 'CDM').target_number)
+
+        def test_4(self):
+            with pytest.raises(ValueError):
+                print(NSC('ROM', 'DEC', 'IVXLCDM').target_number)

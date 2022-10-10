@@ -49,8 +49,14 @@ class NumericalSystemsConverter:
         is_valid_substraction("I", ['M', 'D', 'C', 'L', 'X', 'V'])
         is_valid_substraction("X", ['M', 'D', 'C', 'L'])
         is_valid_substraction("C", ['M', 'D'])
+        is_valid_substraction("V", ['M', 'D', 'C', 'L', 'X', None, None])
+        is_valid_substraction("L", ['M', 'D', 'C', None, None])
+        is_valid_substraction("D", ['M', None, None])
 
-
+        #
+        # for idx, value in enumerate(rom_list):
+        #     if value == "I":
+        #         rom_list[idx + 1]
 
 
 
@@ -68,5 +74,5 @@ class NumericalSystemsConverter:
                 self.target_number -= temp_number
 
 if __name__ == '__main__':
-    x = NumericalSystemsConverter('ROM', 'DEC', 'IIV').target_number
+    x = NumericalSystemsConverter('ROM', 'DEC', 'IVX').target_number
     print(x)
