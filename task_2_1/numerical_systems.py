@@ -8,7 +8,6 @@ rom_to_dec_dict = \
      'M': 1000,
      }
 
-
 class NumericalSystemsConverter:
     def __init__(self, source_system, target_system, number):
         self.number = number
@@ -18,7 +17,6 @@ class NumericalSystemsConverter:
             self.rom_to_dec()
 
     def validate_rom(self):
-
         def is_appearing_once(num):
             if rom_list.count(num) > 1:
                 raise ValueError()
@@ -38,7 +36,6 @@ class NumericalSystemsConverter:
                 else:
                     counter = 0
 
-
         rom_list = list(self.number)
         for i in ("D", "L", "V"):
             is_appearing_once(i)
@@ -52,14 +49,6 @@ class NumericalSystemsConverter:
         is_valid_substraction("V", ['M', 'D', 'C', 'L', 'X', None, None])
         is_valid_substraction("L", ['M', 'D', 'C', None, None])
         is_valid_substraction("D", ['M', None, None])
-
-        #
-        # for idx, value in enumerate(rom_list):
-        #     if value == "I":
-        #         rom_list[idx + 1]
-
-
-
 
     def rom_to_dec(self):
         rom_number_list = list(self.number)
