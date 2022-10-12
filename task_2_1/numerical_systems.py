@@ -8,6 +8,9 @@ rom_to_dec_dict = \
      'M': 1000,
      }
 
+def get_key_by_value(wanted_value):
+    return [key for key, value in rom_to_dec_dict.items() if value == wanted_value]
+
 class NumericalSystemsConverter:
     def __init__(self, source_system, target_system, number):
         self.number = number
@@ -70,8 +73,31 @@ class NumericalSystemsConverter:
                 self.target_number -= temp_number
 
     def dec_to_rom(self):
-        self.target_number = str(self.number)
+        temp_list = []
+        temp = list(str(self.number))
+        for idx, i in enumerate(reversed(temp)):
+            multiplier = 10 ** idx
+            i = int(i)
+
+            if i == 9:
+                temp_list.insert(0, get_key_by_value(multiplier)[0])
+                multiplier = 10 ** (idx+1)
+                temp_list.insert(1, get_key_by_value(multiplier)[0])
+            elif i >= 5:
+                temp_list.insert(0, get_key_by_value(multiplier*5)[0])
+                for x in range(i-5):
+                    temp_list.insert(1, get_key_by_value(multiplier)[0])
+            elif i == 4:
+                temp_list.insert(0, get_key_by_value(multiplier*5)[0])
+                temp_list.insert(0, get_key_by_value(multiplier)[0])
+            else:
+                for x in range(i):
+                    temp_list.insert(0, get_key_by_value(multiplier)[0])
+
+
+        self.target_number = ''.join(temp_list)
 
 if __name__ == '__main__':
-    x = NumericalSystemsConverter('ROM', 'DEC', 'mdclxvi').target_number
+    x = NumericalSystemsConverter('DEC', 'ROM', 79).target_number
     print(x)
+    print(type(x))

@@ -160,3 +160,19 @@ class TestSubLeadingNumsIXC:
 
     def test_dec_to_rom_target_str(self):
         assert isinstance(NSC('DEC', 'ROM', 4).target_number, str)
+
+    class TestDecToRomSmallNums:
+        def test_1(self):
+            assert NSC('DEC', 'ROM', 33).target_number == 'XXXIII'
+
+        def test_2(self):
+            assert NSC('DEC', 'ROM', 79).target_number == 'LXXIX'
+
+        def test_3(self):
+            assert NSC('DEC', 'ROM', 44).target_number == 'XLIV'
+
+        def test_4(self):
+            assert NSC('DEC', 'ROM', 66).target_number == 'LXVI'
+
+        def test_5(self):
+            assert NSC('DEC', 'ROM', 1).target_number == 'I'
