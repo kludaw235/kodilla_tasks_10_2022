@@ -192,3 +192,27 @@ class TestSubLeadingNumsIXC:
 
         def test_5(self):
             assert NSC('DEC', 'ROM', 4999).target_number == 'MMMMCMXCIX'
+
+        class TestDecToRomSrcValid:
+            def test_src_float(self):
+                with pytest.raises(ValueError):
+                    print(NSC('DEC', 'ROM', 2.5).target_number)
+
+            def test_src_list(self):
+                with pytest.raises(ValueError):
+                    print(NSC('DEC', 'ROM', [2, 5]).target_number)
+
+            def test_src_tuple(self):
+                with pytest.raises(ValueError):
+                    print(NSC('DEC', 'ROM', (2, 5)).target_number)
+
+            def test_src_str(self):
+                assert NSC('DEC', 'ROM', '4').target_number == 'IV'
+
+            def test_negative(self):
+                with pytest.raises(ValueError):
+                    print(NSC('DEC', 'ROM', -1).target_number)
+
+            def test_zero(self):
+                with pytest.raises(ValueError):
+                    print(NSC('DEC', 'ROM', 0).target_number)

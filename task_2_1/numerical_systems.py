@@ -72,7 +72,12 @@ class NumericalSystemsConverter:
             else:
                 self.target_number -= temp_number
 
+    def validate_dec(self):
+        if self.number == 0:
+            raise ValueError()
+
     def dec_to_rom(self):
+        self.validate_dec()
         temp_list = []
         temp = list(str(self.number))
         for idx, i in enumerate(reversed(temp)):
@@ -98,6 +103,6 @@ class NumericalSystemsConverter:
         self.target_number = ''.join(temp_list)
 
 if __name__ == '__main__':
-    x = NumericalSystemsConverter('DEC', 'ROM', 4444).target_number
+    x = NumericalSystemsConverter('DEC', 'ROM', 0).target_number
     print(x)
     print(type(x))
