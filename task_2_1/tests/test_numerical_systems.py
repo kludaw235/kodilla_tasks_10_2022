@@ -1,6 +1,7 @@
 import pytest
 from task_2_1.numerical_systems import NumericalSystemsConverter as NSC
 
+
 def test_NumericalSystemsConverter_import():
     try:
         from task_2_1.numerical_systems import NumericalSystemsConverter
@@ -8,14 +9,17 @@ def test_NumericalSystemsConverter_import():
     except ImportError as e:
         raise AssertionError(e)
 
+
 def test_3args_validation():
     try:
         NSC("ROM", "DEC", "IV")
     except Exception as e:
         assert False, f"3 arguments raised an exception: {e}"
 
+
 def test_rom_to_dec_returns_int():
     assert isinstance(NSC("ROM", "DEC", "IV").target_number, int)
+
 
 class TestRomToDecSmallNums:
     def test_1(self):
@@ -32,6 +36,7 @@ class TestRomToDecSmallNums:
 
     def test_5(self):
         assert NSC('ROM', 'DEC', 'XXIX').target_number == 29
+
 
 class TestRomToDecGreatNums:
     def test_1(self):
@@ -62,6 +67,7 @@ class TestSingleAppearDLV:
     def test_single_appear_V(self):
         with pytest.raises(ValueError):
             print(NSC('ROM', 'DEC', 'VVVI').target_number)
+
 
 class TestSmallerDenominationsAsMCX:
     def test_smaller_equal_M(self):
@@ -138,81 +144,87 @@ class TestSubLeadingNumsIXC:
             with pytest.raises(ValueError):
                 print(NSC('ROM', 'DEC', 'CC' + self.inputs[i]).target_number)
 
-    class TestDescendingOrder:
-        def test_1(self):
-            with pytest.raises(ValueError):
-                print(NSC('ROM', 'DEC', 'IVX').target_number)
 
-        def test_2(self):
-            with pytest.raises(ValueError):
-                print(NSC('ROM', 'DEC', 'XLC').target_number)
+class TestDescendingOrder:
+    def test_1(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'IVX').target_number)
 
-        def test_3(self):
-            with pytest.raises(ValueError):
-                print(NSC('ROM', 'DEC', 'CDM').target_number)
+    def test_2(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'XLC').target_number)
 
-        def test_4(self):
-            with pytest.raises(ValueError):
-                print(NSC('ROM', 'DEC', 'IVXLCDM').target_number)
+    def test_3(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'CDM').target_number)
 
-    def test_small_letters(self):
-        assert NSC('ROM', 'DEC', 'mdclxvi').target_number == 1666
+    def test_4(self):
+        with pytest.raises(ValueError):
+            print(NSC('ROM', 'DEC', 'IVXLCDM').target_number)
 
-    def test_dec_to_rom_target_str(self):
-        assert isinstance(NSC('DEC', 'ROM', 4).target_number, str)
 
-    class TestDecToRomSmallNums:
-        def test_1(self):
-            assert NSC('DEC', 'ROM', 33).target_number == 'XXXIII'
+def test_small_letters():
+    assert NSC('ROM', 'DEC', 'mdclxvi').target_number == 1666
 
-        def test_2(self):
-            assert NSC('DEC', 'ROM', 79).target_number == 'LXXIX'
 
-        def test_3(self):
-            assert NSC('DEC', 'ROM', 44).target_number == 'XLIV'
+def test_dec_to_rom_target_str():
+    assert isinstance(NSC('DEC', 'ROM', 4).target_number, str)
 
-        def test_4(self):
-            assert NSC('DEC', 'ROM', 66).target_number == 'LXVI'
 
-        def test_5(self):
-            assert NSC('DEC', 'ROM', 1).target_number == 'I'
+class TestDecToRomSmallNums:
+    def test_1(self):
+        assert NSC('DEC', 'ROM', 33).target_number == 'XXXIII'
 
-    class TestDecToRomGreatNums:
-        def test_1(self):
-            assert NSC('DEC', 'ROM', 1665).target_number == 'MDCLXV'
+    def test_2(self):
+        assert NSC('DEC', 'ROM', 79).target_number == 'LXXIX'
 
-        def test_2(self):
-            assert NSC('DEC', 'ROM', 4444).target_number == 'MMMMCDXLIV'
+    def test_3(self):
+        assert NSC('DEC', 'ROM', 44).target_number == 'XLIV'
 
-        def test_3(self):
-            assert NSC('DEC', 'ROM', 3888).target_number == 'MMMDCCCLXXXVIII'
+    def test_4(self):
+        assert NSC('DEC', 'ROM', 66).target_number == 'LXVI'
 
-        def test_4(self):
-            assert NSC('DEC', 'ROM', 2778).target_number == 'MMDCCLXXVIII'
+    def test_5(self):
+        assert NSC('DEC', 'ROM', 1).target_number == 'I'
 
-        def test_5(self):
-            assert NSC('DEC', 'ROM', 4999).target_number == 'MMMMCMXCIX'
 
-        class TestDecToRomSrcValid:
-            def test_src_float(self):
-                with pytest.raises(ValueError):
-                    print(NSC('DEC', 'ROM', 2.5).target_number)
+class TestDecToRomGreatNums:
+    def test_1(self):
+        assert NSC('DEC', 'ROM', 1665).target_number == 'MDCLXV'
 
-            def test_src_list(self):
-                with pytest.raises(ValueError):
-                    print(NSC('DEC', 'ROM', [2, 5]).target_number)
+    def test_2(self):
+        assert NSC('DEC', 'ROM', 4444).target_number == 'MMMMCDXLIV'
 
-            def test_src_tuple(self):
-                with pytest.raises(ValueError):
-                    print(NSC('DEC', 'ROM', (2, 5)).target_number)
+    def test_3(self):
+        assert NSC('DEC', 'ROM', 3888).target_number == 'MMMDCCCLXXXVIII'
 
-            def test_src_str(self):
-                assert NSC('DEC', 'ROM', '4').target_number == 'IV'
+    def test_4(self):
+        assert NSC('DEC', 'ROM', 2778).target_number == 'MMDCCLXXVIII'
 
-            def test_negative(self):
-                with pytest.raises(ValueError):
-                    print(NSC('DEC', 'ROM', -1).target_number)
+    def test_5(self):
+        assert NSC('DEC', 'ROM', 4999).target_number == 'MMMMCMXCIX'
 
-            def test_zero(self):
-                with pytest.raises(ValueError):
-                    print(NSC('DEC', 'ROM', 0).target_number)
+
+class TestDecToRomSrcValid:
+    def test_src_float(self):
+        with pytest.raises(ValueError):
+            print(NSC('DEC', 'ROM', 2.5).target_number)
+
+    def test_src_list(self):
+        with pytest.raises(ValueError):
+            print(NSC('DEC', 'ROM', [2, 5]).target_number)
+
+    def test_src_tuple(self):
+        with pytest.raises(ValueError):
+            print(NSC('DEC', 'ROM', (2, 5)).target_number)
+
+    def test_src_str(self):
+        assert NSC('DEC', 'ROM', '4').target_number == 'IV'
+
+    def test_negative(self):
+        with pytest.raises(ValueError):
+            print(NSC('DEC', 'ROM', -1).target_number)
+
+    def test_zero(self):
+        with pytest.raises(ValueError):
+            print(NSC('DEC', 'ROM', 0).target_number)
