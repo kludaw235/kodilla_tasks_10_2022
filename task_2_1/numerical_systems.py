@@ -87,7 +87,7 @@ class NumericalSystemsConverter:
                 temp_list.insert(0, get_key_by_value(multiplier*5)[0])
                 for x in range(i-5):
                     temp_list.insert(1, get_key_by_value(multiplier)[0])
-            elif i == 4:
+            elif i == 4 and multiplier != 1000:
                 temp_list.insert(0, get_key_by_value(multiplier*5)[0])
                 temp_list.insert(0, get_key_by_value(multiplier)[0])
             else:
@@ -98,6 +98,6 @@ class NumericalSystemsConverter:
         self.target_number = ''.join(temp_list)
 
 if __name__ == '__main__':
-    x = NumericalSystemsConverter('DEC', 'ROM', 79).target_number
+    x = NumericalSystemsConverter('DEC', 'ROM', 4444).target_number
     print(x)
     print(type(x))
