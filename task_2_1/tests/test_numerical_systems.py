@@ -3,22 +3,16 @@ from task_2_1.numerical_systems import NumericalSystemsConverter as NSC
 
 
 def test_NumericalSystemsConverter_import():
-    try:
-        from task_2_1.numerical_systems import NumericalSystemsConverter
-        assert callable(NumericalSystemsConverter), '"NumericalSystemsConverter" is not callable'
-    except ImportError as e:
-        raise AssertionError(e)
+    from task_2_1.numerical_systems import NumericalSystemsConverter
+    assert callable(NumericalSystemsConverter), '"NumericalSystemsConverter" is not callable'
 
 
-def test_3args_validation():
-    try:
-        NSC("ROM", "DEC", "IV")
-    except Exception as e:
-        assert False, f"3 arguments raised an exception: {e}"
+def test_2args_validation():
+    NSC("ROM", "DEC")
 
 
 def test_rom_to_dec_returns_int():
-    assert isinstance(NSC("ROM", "DEC", "IV").target_number, int)
+    assert isinstance(NSC("ROM", "DEC").convert("IV"), int)
 
 
 @pytest.mark.parametrize('rom_value, expected', (
@@ -28,7 +22,7 @@ def test_rom_to_dec_returns_int():
         ('XIIIIII', 16),
         ('XXIX', 29)))
 def test_rom_to_dec_small_nums(rom_value, expected):
-    assert NSC('ROM', 'DEC', rom_value).target_number == expected
+    assert NSC('ROM', 'DEC').convert(rom_value) == expected
 
 
 @pytest.mark.parametrize('rom_value, expected', (
@@ -38,7 +32,7 @@ def test_rom_to_dec_small_nums(rom_value, expected):
         ('MMDCCLXXVIII', 2778),
         ('CMXCIX', 999)))
 def test_rom_to_dec_big_nums(rom_value, expected):
-    assert NSC('ROM', 'DEC', rom_value).target_number == expected
+    assert NSC('ROM', 'DEC').convert(rom_value) == expected
 
 
 @pytest.mark.parametrize('rom_value, expected_failure', (
@@ -47,7 +41,7 @@ def test_rom_to_dec_big_nums(rom_value, expected):
         ('VVVI', ValueError)))
 def test_single_appear_DLV(rom_value, expected_failure):
     with pytest.raises(expected_failure):
-        print(NSC('ROM', 'DEC', rom_value).target_number)
+        NSC('ROM', 'DEC').convert(rom_value)
 
 
 @pytest.mark.parametrize('rom_value, expected_failure', (
@@ -59,7 +53,7 @@ def test_single_appear_DLV(rom_value, expected_failure):
         ('IIIIIIIIIII', ValueError)))
 def test_denomination_exceed_equal_MCX(rom_value, expected_failure):
     with pytest.raises(expected_failure):
-        print(NSC('ROM', 'DEC', rom_value).target_number)
+        NSC('ROM', 'DEC').convert(rom_value)
 
 
 @pytest.mark.parametrize('rom_value, expected', (
@@ -67,7 +61,7 @@ def test_denomination_exceed_equal_MCX(rom_value, expected_failure):
         ('XXXXXXXXX', 90),
         ('IIIIIIIII', 9)))
 def test_denomination_correct_MCX(rom_value, expected):
-    assert NSC('ROM', 'DEC', rom_value).target_number == expected
+    assert NSC('ROM', 'DEC').convert(rom_value) == expected
 
 
 @pytest.mark.parametrize('sub_numeral, expected_results', (
@@ -79,9 +73,9 @@ def test_sub_leading_IXC(sub_numeral, expected_results):
     for i in range(len(following_values)):
         if expected_results[i] in Exception.__subclasses__():
             with pytest.raises(expected_results[i]):
-                print(NSC('ROM', 'DEC', sub_numeral + following_values[i]).target_number)
+                NSC('ROM', 'DEC').convert(sub_numeral + following_values[i])
         else:
-            assert NSC('ROM', 'DEC', sub_numeral + following_values[i]).target_number == expected_results[i]
+            assert NSC('ROM', 'DEC').convert(sub_numeral + following_values[i]) == expected_results[i]
 
 
 @pytest.mark.parametrize('sub_numeral, expected_failure, following_values', (
@@ -91,7 +85,7 @@ def test_sub_leading_IXC(sub_numeral, expected_results):
 def test_single_sub_leading_IXC(sub_numeral, expected_failure, following_values):
     for i in range(len(following_values) - 1):
         with pytest.raises(expected_failure):
-            print(NSC('ROM', 'DEC', sub_numeral + following_values[i]).target_number)
+            NSC('ROM', 'DEC').convert(sub_numeral + following_values[i])
 
 
 @pytest.mark.parametrize('rom_value, expected_failure', (
@@ -101,15 +95,15 @@ def test_single_sub_leading_IXC(sub_numeral, expected_failure, following_values)
         ('IVXLCDM', ValueError)))
 def test_descending_order(rom_value, expected_failure):
     with pytest.raises(expected_failure):
-        print(NSC('ROM', 'DEC', rom_value).target_number)
+        NSC('ROM', 'DEC').convert(rom_value)
 
 
 def test_small_letters():
-    assert NSC('ROM', 'DEC', 'mdclxvi').target_number == 1666
+    assert NSC('ROM', 'DEC').convert('mdclxvi') == 1666
 
 
 def test_dec_to_rom_target_str():
-    assert isinstance(NSC('DEC', 'ROM', 4).target_number, str)
+    assert isinstance(NSC('DEC', 'ROM').convert(4), str)
 
 
 @pytest.mark.parametrize('dec_value, expected', (
@@ -119,7 +113,7 @@ def test_dec_to_rom_target_str():
         (66, 'LXVI'),
         (1, 'I')))
 def test_dec_to_rom_small_nums(dec_value, expected):
-    assert NSC('DEC', 'ROM', dec_value).target_number == expected
+    assert NSC('DEC', 'ROM').convert(dec_value) == expected
 
 
 @pytest.mark.parametrize('dec_value, expected', (
@@ -129,7 +123,7 @@ def test_dec_to_rom_small_nums(dec_value, expected):
         (2778, 'MMDCCLXXVIII'),
         (4999, 'MMMMCMXCIX')))
 def test_dec_to_rom_big_nums(dec_value, expected):
-    assert NSC('DEC', 'ROM', dec_value).target_number == expected
+    assert NSC('DEC', 'ROM').convert(dec_value) == expected
 
 
 @pytest.mark.parametrize('test, input, expected_failure', (
@@ -140,8 +134,8 @@ def test_dec_to_rom_big_nums(dec_value, expected):
         ('Test zero', 0, ValueError)))
 def test_dec_to_rom_input_validation(test, input, expected_failure):
     with pytest.raises(expected_failure):
-        print(NSC('DEC', 'ROM', input).target_number, test)
+        NSC('DEC', 'ROM').convert(input)
 
 
 def test_src_str():
-    assert NSC('DEC', 'ROM', '4').target_number == 'IV'
+    assert NSC('DEC', 'ROM').convert('4') == 'IV'
