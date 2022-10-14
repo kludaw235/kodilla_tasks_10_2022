@@ -19,24 +19,12 @@ class NumericalSystemsConverter:
         self.target_system = target_system
 
     def convert(self, number):
-        self.number = number
         if self.source_system == "ROM" and self.target_system == "DEC":
-            return self.rom_to_dec()
+            return self.rom_to_dec(number)
         elif self.source_system == "DEC" and self.target_system == "ROM":
-            return self.dec_to_rom()
+            return self.dec_to_rom(number)
 
-    def validate_rom(self):
-        def validate_small_letters():
-            self.number = self.number.upper()
-
-        def is_appearing_once(num):
-            if rom_list.count(num) > 1:
-                raise ValueError()
-
-        def is_valid_denomination(num):
-            if rom_list.count(num) >= 10:
-                raise ValueError()
-
+    def validate_rom(self, number):
         def is_valid_substraction(value_checked, forbidden_pre_values):
             counter = 0
             for idx, val in enumerate(rom_list[:-1]):
@@ -48,25 +36,24 @@ class NumericalSystemsConverter:
                 else:
                     counter = 0
 
-        validate_small_letters()
-        rom_list = list(self.number)
-
-        for i in ("D", "L", "V"):
-            is_appearing_once(i)
-
-        for i in ("C", "X", "I"):
-            is_valid_denomination(i)
-
+        number = number.upper()
+        rom_list = list(number)
+        for letter in ("D", "L", "V"):
+            if rom_list.count(letter) > 1:
+                raise ValueError()
+        for letter in ("C", "X", "I"):
+            if rom_list.count(letter) >= 10:
+                raise ValueError()
         is_valid_substraction("I", ['M', 'D', 'C', 'L', 'X', 'V'])
         is_valid_substraction("X", ['M', 'D', 'C', 'L'])
         is_valid_substraction("C", ['M', 'D'])
         is_valid_substraction("V", ['M', 'D', 'C', 'L', 'X', None, None])
         is_valid_substraction("L", ['M', 'D', 'C', None, None])
         is_valid_substraction("D", ['M', None, None])
+        return rom_list
 
-    def rom_to_dec(self):
-        self.validate_rom()
-        rom_number_list = list(self.number)
+    def rom_to_dec(self, number):
+        rom_number_list = self.validate_rom(number)
         temp_number = 0
         target_number = 0
         for r in reversed(rom_number_list):
@@ -78,14 +65,15 @@ class NumericalSystemsConverter:
                 target_number -= temp_number
         return target_number
 
-    def validate_dec(self):
-        if self.number == 0:
+    def validate_dec(self, number):
+        if number == 0:
             raise ValueError()
+        return True
 
-    def dec_to_rom(self):
-        self.validate_dec()
+    def dec_to_rom(self, number):
+        self.validate_dec(number)
         temp_list = []
-        temp = list(str(self.number))
+        temp = list(str(number))
         for idx, i in enumerate(reversed(temp)):
             multiplier = 10 ** idx
             i = int(i)
