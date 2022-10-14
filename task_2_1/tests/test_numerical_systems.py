@@ -7,10 +7,6 @@ def test_NumericalSystemsConverter_import():
     assert callable(NumericalSystemsConverter), '"NumericalSystemsConverter" is not callable'
 
 
-def test_2args_validation():
-    NSC("ROM", "DEC")
-
-
 def test_rom_to_dec_returns_int():
     assert isinstance(NSC("ROM", "DEC").convert("IV"), int)
 
