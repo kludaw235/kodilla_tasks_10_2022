@@ -1,0 +1,48 @@
+{% block navbar %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link {{'active' if active_menu=='home'}}" href="{{url_for('index')}}">Home</a>
+            </li>
+            {% if login.is_valid %}
+            <li class="nav-item">
+              <a class="nav-link {{'active' if active_menu=='new_quiz'}}" href="{{url_for('new_quiz')}}">New quiz</a>
+            </li>
+            {% endif %}
+            {% if login.is_valid %}
+            <li class="nav-item">
+              <a class="nav-link {{'active' if active_menu=='scoreboard'}}" href="{{url_for('scoreboard')}}">Scoreboard</a>
+            </li>
+            {% endif %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle {{'active' if active_menu=='users'}}" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Users
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% if login.is_valid and login.is_admin %}
+                <a class="dropdown-item" href="{{url_for('users')}}">Users</a>
+                {% endif %}
+                <a class="dropdown-item" href="{{url_for('new_user')}}">New user</a>
+              </div>
+            </li>
+            {% if not login.is_valid %}
+            <li class="nav-item">
+              <a class="nav-link {{'active' if active_menu=='login'}}" href="{{url_for('login')}}">Login</a>
+            </li>
+            {% endif %}
+            {% if login.is_valid %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('logout')}}">Logout {{ session['user'] if 'user' in session }}</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+{% endblock %}

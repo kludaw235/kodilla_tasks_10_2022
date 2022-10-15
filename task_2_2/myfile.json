@@ -1,0 +1,24 @@
+{
+    "users": [
+        {
+            "name": "aa",
+            "score": 185,
+            "rank": 1
+        },
+        {
+            "name": "bb",
+            "score": 174,
+            "rank": 2
+        },
+        {
+            "name": "izo",
+            "score": 157,
+            "rank": 3
+        },
+        {
+            "name": "admin",
+            "score": 58,
+            "rank": 4
+        }
+    ]
+}

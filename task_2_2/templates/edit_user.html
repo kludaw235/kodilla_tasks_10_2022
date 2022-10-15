@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+      <div class="row justify-content-start">
+        <div class="col-5 h1">Edit user {{user.name}}</div>
+      </div>
+      <form id="edit_user_form" action="{{url_for('user_edit', user_name=user.name)}}" method="POST">
+          <div class="row justify-content-start">
+              <div class="col-1 col-form-label">Email</div>
+              <div class="col-2">
+                <input type="text" id="user_email" name="user_email" value="{{user.email}}" class="form-control"><br>
+              </div>
+          </div>
+          <div class="row justify-content-start">
+              <div class="col-1 col-form-label">Password</div>
+              <div class="col-2">
+                <input type="password" id="user_pass" name="user_pass" class="form-control"><br>
+              </div>
+          </div>
+          <div class="row justify-content-start">
+              <div class="col-1"></div>
+              <div class="col-2">
+                <input type="submit" value="Confirm changes" class="btn btn-primary">
+              </div>
+          </div>
+      </form>
+
+
+{% endblock %}
+

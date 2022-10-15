@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+      <div class="row justify-content-start">
+        <div class="col-5 h1">User login form</div>
+      </div>
+      <form id="login_form" action="{{url_for('login')}}" method="POST">
+          <div class="row justify-content-start">
+              <div class="col-1 col-form-label">Login</div>
+              <div class="col-2">
+                <input type="text" id="user_name" name="user_name" class="form-control"><br>
+              </div>
+          </div>
+          <div class="row justify-content-start">
+              <div class="col-1 col-form-label">Password</div>
+              <div class="col-2">
+                <input type="password" id="login_pass" name="login_pass" class="form-control"><br>
+              </div>
+          </div>
+          <div class="row justify-content-start">
+              <div class="col-1"></div>
+              <div class="col-2">
+                <input type="submit" value="Login" class="btn btn-primary">
+              </div>
+          </div>
+      </form>
+
+
+{% endblock %}
+

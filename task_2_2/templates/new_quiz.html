@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="container">
+      <div class="row justify-content-start">
+        <div class="col-5 h1">New quiz</div>
+      </div>
+      <form id="new_quiz_form" action="{{url_for('new_quiz')}}" method="POST">
+          <div class="row justify-content-start">
+              <div class="col-1 col-form-label">Select difficulty</div>
+              <div class="col-2">
+                <select name="difficulty" id="difficulty" class="form-select">
+                    {% for difficulty in settings.difficulties %}
+                        <option>{{difficulty.name}}</option>
+                    {% endfor %}
+                </select><br>
+              </div>
+          </div>
+          <div class="row justify-content-start">
+              <div class="col-1 col-form-label">Select category</div>
+              <div class="col-2">
+                <select name="category" id="category" class="form-select">
+                    {% for category in settings.categories %}
+                        <option>{{category}}</option>
+                    {% endfor %}
+                </select><br>
+              </div>
+          </div>
+          <div class="row justify-content-start">
+              <div class="col-1"></div>
+              <div class="col-2">
+                <input type="submit" value="Send" class="btn btn-primary">
+              </div>
+          </div>
+      </form>
+
+
+{% endblock %}
+
