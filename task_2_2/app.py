@@ -6,6 +6,7 @@ import random
 import binascii
 import string
 from task_2_2.scoreboard import Scoreboard
+from .modules.difficulty import Difficulty
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
@@ -90,14 +91,6 @@ def verify_authorization(login_required=False, admin_required=False):
         return
     return login
 
-
-class Difficulty:
-    def __init__(self, name="Medium", points_multiplier=2):
-        self.name = name
-        self.points_multiplier = points_multiplier
-
-    def __repr__(self):
-        return f"Difficulty {self.name} with {self.points_multiplier}x point multiplier"
 
 
 class QuizSettings:
