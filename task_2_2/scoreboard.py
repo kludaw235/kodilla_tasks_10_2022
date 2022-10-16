@@ -20,8 +20,9 @@ class Scoreboard():
 
     def get_user_rank(self, score):
         scoreboard = self.get_scoreboard()
+        rank = len(scoreboard) + 1
         for scoreboard_user in scoreboard["users"]:
-            if scoreboard_user["score"] <= score:
+            if score >= scoreboard_user["score"]:
                 rank = scoreboard_user["rank"]
         return rank
 
