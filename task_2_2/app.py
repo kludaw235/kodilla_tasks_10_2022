@@ -6,7 +6,7 @@ import random
 import binascii
 import string
 from task_2_2.scoreboard import Scoreboard
-from .modules.difficulty import Difficulty
+from .modules.quiz_settings import QuizSettings
 
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
@@ -90,25 +90,6 @@ def verify_authorization(login_required=False, admin_required=False):
         flash("Admin account is required.")
         return
     return login
-
-
-
-class QuizSettings:
-    def __init__(self):
-        self.difficulties = []
-        self.categories = []
-
-    def load_difficulties(self):
-        self.difficulties.append(Difficulty(name="Easy", points_multiplier=1))
-        self.difficulties.append(Difficulty(name="Medium", points_multiplier=2))
-        self.difficulties.append(Difficulty(name="Hard", points_multiplier=3))
-        self.difficulties.append(Difficulty(name="Very hard", points_multiplier=4))
-
-    def load_categories(self):
-        self.categories.append("Movie")
-        self.categories.append("Music")
-        self.categories.append("Economy")
-        self.categories.append("Animals")
 
 
 @app.route('/init_app')
