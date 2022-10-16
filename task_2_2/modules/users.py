@@ -1,4 +1,4 @@
-from task_2_2.app import db
+from ..app import db
 
 class Users(db.Model):
 
