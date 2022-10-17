@@ -20,10 +20,11 @@ class Scoreboard():
 
     def get_user_rank(self, score):
         scoreboard = self.get_scoreboard()
-        rank = len(scoreboard) + 1
+        rank = len(scoreboard["users"]) + 1
         for scoreboard_user in scoreboard["users"]:
             if score >= scoreboard_user["score"]:
                 rank = scoreboard_user["rank"]
+                break
         return rank
 
     def set_users_ranks_by_index(self, json_score_sorted):
@@ -56,6 +57,8 @@ class Scoreboard():
             try:
                 multiplier = self.__level_multiplier[game.difficulty]
             except KeyError:
+                multiplier = 0
+            if game.correct_answers < 0 or game.correct_answers > 10:
                 multiplier = 0
             score += (game.correct_answers * multiplier)
         return score
