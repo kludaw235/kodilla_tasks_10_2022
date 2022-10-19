@@ -5,3 +5,4 @@ pytest
 pytest-sugar
 pytest-cov
 jsonify
+pytest-mock
