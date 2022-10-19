@@ -1,18 +1,16 @@
 from .difficulty import Difficulty
 
+LEVEL_MULTIPLIER = {
+            "Easy": 1,
+            "Medium": 2,
+            "Hard": 3,
+            "Very hard": 4
+}
+
 class QuizSettings:
     def __init__(self):
         self.difficulties = []
-        self.categories = []
+        for key, value in LEVEL_MULTIPLIER.items():
+            self.difficulties.append(Difficulty(name=key, points_multiplier=value))
 
-    def load_difficulties(self):
-        self.difficulties.append(Difficulty(name="Easy", points_multiplier=1))
-        self.difficulties.append(Difficulty(name="Medium", points_multiplier=2))
-        self.difficulties.append(Difficulty(name="Hard", points_multiplier=3))
-        self.difficulties.append(Difficulty(name="Very hard", points_multiplier=4))
-
-    def load_categories(self):
-        self.categories.append("Movie")
-        self.categories.append("Music")
-        self.categories.append("Economy")
-        self.categories.append("Animals")
+        self.categories = ["Movie", "Music", "Economy", "Animals"]
