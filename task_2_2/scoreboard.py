@@ -3,7 +3,8 @@ import json
 
 
 class Scoreboard():
-    def __init__(self):
+    def __init__(self, data_file):
+        self.__data_file = data_file
         self.__level_multiplier = {
             "Very hard": 4,
             "Hard": 3,
@@ -11,12 +12,17 @@ class Scoreboard():
             "Easy": 1
         }
         self.__json_path = os.path.dirname(__file__) + "\\myfile.json"
+
+    def init_scoreboard(self):
         if not os.path.exists(self.__json_path):
             with open(self.__json_path, "w", encoding="utf-8") as json_file:
-                self.data = {
-                    "users": []
-                }
-                json.dump(self.data, json_file, indent=4)
+                json.dumps({"users": []}, json_file, indent=4)
+
+
+    def get_scoreboard(self):
+        with open(self.__json_path, "r", encoding="utf-8") as json_file:
+            json_data = json.load(json_file)
+        return json_data
 
     def get_user_rank(self, score):
         scoreboard = self.get_scoreboard()
@@ -62,14 +68,3 @@ class Scoreboard():
                 multiplier = 0
             score += (game.correct_answers * multiplier)
         return score
-
-    def get_scoreboard(self):
-        with open(self.__json_path, "r", encoding="utf-8") as json_file:
-            json_data = json.load(json_file)
-        return json_data
-
-
-if __name__ == '__main__':
-    sb = Scoreboard()
-    data = sb.get_scoreboard(1)
-    print(data)
