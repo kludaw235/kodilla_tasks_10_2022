@@ -5,7 +5,7 @@ from task_2_2.scoreboard import Scoreboard
 app = Flask(__name__)
 app.config.from_pyfile('config.cfg')
 db = SQLAlchemy(app)
-sb = Scoreboard()
+sb = Scoreboard('myfile.json')
 
 import task_2_2.routes
 
