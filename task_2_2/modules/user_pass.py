@@ -3,8 +3,9 @@ import hashlib
 import binascii
 import random
 import string
-from .users import Users
+from task_2_2.querries import DatabaseQuerries
 
+db = DatabaseQuerries()
 
 class UserPass:
     def __init__(self, user='', password=''):
@@ -41,7 +42,8 @@ class UserPass:
         self.password = random_password
 
     def login_user(self):
-        user_record = Users.query.filter(Users.name == self.user).first()
+        # user_record = Users.query.filter(Users.name == self.user).first()
+        user_record = db.get_user_by_name(user_name=self.user)
         if user_record != None and self.verify_password(user_record.password, self.password):
             return user_record
         else:
@@ -50,7 +52,8 @@ class UserPass:
             return None
 
     def get_user_info(self):
-        user_info = Users.query.filter(Users.name == self.user).first()
+        # user_info = Users.query.filter(Users.name == self.user).first()
+        user_info = db.get_user_by_name(user_name=self.user)
 
         if user_info == None:
             self.is_valid = False
