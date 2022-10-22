@@ -1,11 +1,16 @@
 import random
 from flask import redirect, url_for, render_template, session, flash, request, json
 from sqlalchemy import exc
-from .app import app, db, sb
+from .app import app, db
 from .modules.quiz_settings import QuizSettings
 from .modules.users import Users
 from .modules.quiz import Quiz
 from .modules.user_pass import UserPass, verify_authorization
+from task_2_2.scoreboard import Scoreboard
+
+
+sb = Scoreboard('myfile.json')
+
 
 @app.route('/init_app')
 def init_app():
