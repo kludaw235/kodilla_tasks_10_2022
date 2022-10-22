@@ -45,8 +45,6 @@ def new_quiz():
         return redirect('login')
 
     settings = QuizSettings()
-    settings.load_difficulties()
-    settings.load_categories()
 
     if request.method == 'GET':
         return render_template('new_quiz.html', settings=settings, active_menu='new_quiz', login=login)
