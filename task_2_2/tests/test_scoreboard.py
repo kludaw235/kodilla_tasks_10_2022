@@ -4,6 +4,8 @@ import sys
 import json
 from unittest.mock import Mock, patch
 from task_2_2.scoreboard import Scoreboard
+# from pytest_mock import mocker
+# from task_2_2.modules.quiz import Quiz
 
 
 @pytest.fixture()
@@ -122,8 +124,6 @@ def test_user_score_invalid_data(scoreboard, UserMock, difficulty, correct_answe
     user_score = scoreboard.get_user_score(UserMock)
     assert user_score == expected
 
-
-
 # Integrity tests
 
 @pytest.fixture
@@ -132,3 +132,7 @@ def scoreboard_integrity():
     scoreboard.init_scoreboard()
     return scoreboard
 
+# def test_get_user_score(scoreboard, user):
+#     mocker.patch('db.get_all_games', return_value=[Quiz(), Quiz(), Quiz()])
+#     score = scoreboard.get_user_score(user)
+#     assert score == 2
