@@ -1,7 +1,5 @@
-from task_2_2.routes import db_actions
 from .users import Users
-
-db = db_actions.db
+from task_2_2.database import db
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True)

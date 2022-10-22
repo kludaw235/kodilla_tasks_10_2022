@@ -7,11 +7,11 @@ from .modules.quiz_settings import QuizSettings
 # from .modules.quiz import Quiz
 from .modules.user_pass import UserPass, verify_authorization
 from task_2_2.scoreboard import Scoreboard
-from task_2_2.database import DatabaseQuerries
+from task_2_2.querries import DatabaseQuerries
 
 
 sb = Scoreboard('myfile.json')
-db_actions = DatabaseQuerries(app)
+db_actions = DatabaseQuerries()
 
 
 @app.route('/init_app')
