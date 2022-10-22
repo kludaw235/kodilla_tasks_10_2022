@@ -1,6 +1,8 @@
-from ..app import db
+from task_2_2.routes import db_actions
 
-class Users(db.Model):
+db = db_actions.db
+
+class Users(db_actions.db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False, unique=True)
