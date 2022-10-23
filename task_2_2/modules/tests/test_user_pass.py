@@ -1,6 +1,7 @@
 from task_2_2.modules.user_pass import UserPass
 import pytest
-from pytest_mock import class_mocker
+from unittest.mock import Mock
+from pytest_mock import mocker
 
 def test_Scoreboard_import():
     from task_2_2.modules.user_pass import UserPass
@@ -20,6 +21,30 @@ def test_random_password_3_signs_string(userpass):
     assert len(userpass.password) == 3
     assert isinstance(userpass.password, str)
 
+@pytest.fixture()
+def user_mock():
+    user = Mock()
+    user.password.return_value = 'password'
+    return user
+
+def test_login_user_valid(mocker, userpass, user_mock):
+    mocker.patch('task_2_2.querries.DatabaseQuerries.get_user_by_name', return_value=user_mock)
+    mocker.patch('task_2_2.modules.user_pass.UserPass.verify_password', return_value=True)
+    assert userpass.login_user() == user_mock
+
+
+@pytest.mark.parametrize('valid_user, valid_password', [
+    (True, False),
+    (None, True),
+    (None, False)])
+def test_login_user_invalid(mocker, userpass, user_mock, valid_user, valid_password):
+    if valid_user:
+        valid_user = user_mock
+    mocker.patch('task_2_2.querries.DatabaseQuerries.get_user_by_name', return_value=valid_user)
+    mocker.patch('task_2_2.modules.user_pass.UserPass.verify_password', return_value=valid_password)
+    assert userpass.login_user() == None
+
+
 # Integrity tests
 
 @pytest.fixture(params=['', 'SDF123!@#$%^&*()', 11, 11.1])
@@ -30,4 +55,3 @@ def test_hash_password(passwords):
     userpass_passwords = UserPass(passwords)
     stored_password = userpass_passwords.hash_password()
     assert userpass_passwords.verify_password(stored_password, userpass_passwords.password)
-
