@@ -44,6 +44,35 @@ def test_login_user_invalid(mocker, userpass, user_mock, valid_user, valid_passw
     mocker.patch('task_2_2.modules.user_pass.UserPass.verify_password', return_value=valid_password)
     assert userpass.login_user() == None
 
+def test_user_info_none(mocker, userpass):
+    mocker.patch('task_2_2.querries.DatabaseQuerries.get_user_by_name', return_value=None)
+    userpass.get_user_info()
+    assert userpass.is_valid == False
+    assert userpass.is_admin == False
+    assert userpass.email == ''
+
+def test_user_info_not_active(mocker, userpass):
+    user = Mock()
+    user.is_active = False
+    user.email = 'test_not_active'
+    mocker.patch('task_2_2.querries.DatabaseQuerries.get_user_by_name', return_value=user)
+    userpass.get_user_info()
+    assert userpass.is_valid == False
+    assert userpass.is_admin == False
+    assert userpass.email == 'test_not_active'
+
+def test_user_info_active(mocker, userpass):
+    user = Mock()
+    user.email = 'test_active'
+    user.is_active = True
+    user.is_admin = True
+    mocker.patch('task_2_2.querries.DatabaseQuerries.get_user_by_name', return_value=user)
+    userpass.get_user_info()
+    assert userpass.is_valid == True
+    assert userpass.is_admin == True
+    assert userpass.email == 'test_active'
+
+
 
 # Integrity tests
 
