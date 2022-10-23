@@ -1,5 +1,8 @@
 import os
 import json
+from task_2_2.querries import DatabaseQuerries
+
+db = DatabaseQuerries()
 
 
 class Scoreboard():
@@ -58,7 +61,7 @@ class Scoreboard():
 
     def get_user_score(self, user):
         score = 0
-        all_games = user.quizzes.all()
+        all_games = db.get_all_games(user)
         for game in all_games:
             try:
                 multiplier = self.__level_multiplier[game.difficulty]
