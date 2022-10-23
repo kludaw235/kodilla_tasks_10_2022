@@ -1,11 +1,16 @@
-from task_2_2.modules.user_pass import UserPass
+from task_2_2.modules.user_pass import UserPass, verify_authorization
 import pytest
 from unittest.mock import Mock
 from pytest_mock import mocker
+from task_2_2.app import app
 
 def test_Scoreboard_import():
     from task_2_2.modules.user_pass import UserPass
     assert callable(UserPass), '"UserPass" is not callable'
+
+# @pytest.fixture(autouse=True)
+# def no_requests(monkeypatch):
+#     monkeypatch.delattr('flask.session.get')
 
 @pytest.fixture()
 def userpass():
@@ -72,6 +77,32 @@ def test_user_info_active(mocker, userpass):
     assert userpass.is_admin == True
     assert userpass.email == 'test_active'
 
+### Working outside of context due to session.get() and flash()
+# @pytest.fixture(params=[True, False])
+# def is_valid(request):
+#     return request.param
+# @pytest.fixture(params=[True, False])
+# def is_admin(request):
+#     return request.param
+# @pytest.fixture(params=[True, False])
+# def login(request):
+#     return request.param
+# @pytest.fixture(params=[True, False])
+# def admin(request):
+#     return request.param
+#
+# def test_authorization(mocker, login, admin, is_valid, is_admin):
+#     user = Mock()
+#     user.is_valid = is_valid
+#     user.is_admin = is_admin
+#     # mocker.patch('flask.session', return_value="test")
+#     # mocker.patch('flask.flash', return_value=None)
+#     mocker.patch('task_2_2.modules.user_pass.UserPass', return_value=user)
+#     mocker.patch('task_2_2.modules.user_pass.UserPass.get_user_info', return_value=None)
+#     if (login == False or is_valid == True) and (admin == False or is_admin == True):
+#         assert verify_authorization(login, admin) == user
+#     else:
+#         assert verify_authorization(login, admin) == None
 
 
 # Integrity tests
