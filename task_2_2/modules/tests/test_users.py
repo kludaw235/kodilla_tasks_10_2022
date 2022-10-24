@@ -1,9 +1,5 @@
 from task_2_2.modules.users import Users
 
-def test_Users_import():
-    from task_2_2.modules.users import Users
-    assert callable(Users), '"Users" is not callable'
-
 def test_user():
     user_id = 1
     name = "John"

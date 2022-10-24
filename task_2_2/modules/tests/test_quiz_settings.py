@@ -2,10 +2,6 @@ from task_2_2.modules.quiz_settings import QuizSettings
 from task_2_2.modules.difficulty import Difficulty
 import pytest
 
-def test_Scoreboard_import():
-    from task_2_2.modules.quiz_settings import QuizSettings
-    assert callable(QuizSettings), '"QuizSettings" is not callable'
-
 @pytest.fixture()
 def quiz_settings():
     return QuizSettings()

@@ -3,10 +3,6 @@ from flask import Flask
 # from pytest_mock import mocker, class_mocker
 # from unittest.mock import Mock, MagicMock
 
-def test_app_import_variables():
-    from task_2_2 import app
-    assert callable(app.app), '"app" is not callable'
-
 def test_extensions_registered(mocker):
     ext_register = mocker.patch('task_2_2.database.db.init_app', return_value=True)
     app_test.register_extensions("test")

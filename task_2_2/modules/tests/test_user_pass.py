@@ -4,10 +4,6 @@ from unittest.mock import Mock
 from pytest_mock import mocker
 from task_2_2.app import app
 
-def test_Scoreboard_import():
-    from task_2_2.modules.user_pass import UserPass
-    assert callable(UserPass), '"UserPass" is not callable'
-
 # @pytest.fixture(autouse=True)
 # def no_requests(monkeypatch):
 #     monkeypatch.delattr('flask.session.get')

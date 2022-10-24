@@ -1,9 +1,6 @@
 from task_2_2.modules.difficulty import Difficulty
 import pytest
 
-def test_Difficulty_import():
-    from task_2_2.modules.difficulty import Difficulty
-    assert callable(Difficulty), '"Difficulty" is not callable'
 
 def test_attr_assign_name():
     diff = Difficulty(name="Test")
