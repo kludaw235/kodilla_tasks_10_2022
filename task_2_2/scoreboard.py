@@ -4,17 +4,16 @@ from task_2_2.querries import DatabaseQuerries
 
 db = DatabaseQuerries()
 
+LEVEL_MULTIPLIER = {
+            "Easy": 1,
+            "Medium": 2,
+            "Hard": 3,
+            "Very hard": 4
+}
 
 class Scoreboard():
     def __init__(self, data_file):
-        self.__data_file = data_file
-        self.__level_multiplier = {
-            "Very hard": 4,
-            "Hard": 3,
-            "Medium": 2,
-            "Easy": 1
-        }
-        self.__json_path = os.path.dirname(__file__) + "\\myfile.json"
+        self.__json_path = os.path.dirname(__file__) + "\\" + data_file
 
     def init_scoreboard(self):
         if not os.path.exists(self.__json_path):
@@ -64,7 +63,7 @@ class Scoreboard():
         all_games = db.get_all_games(user)
         for game in all_games:
             try:
-                multiplier = self.__level_multiplier[game.difficulty]
+                multiplier = LEVEL_MULTIPLIER[game.difficulty]
             except KeyError:
                 multiplier = 0
             if game.correct_answers < 0 or game.correct_answers > 10:

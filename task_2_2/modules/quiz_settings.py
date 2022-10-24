@@ -1,11 +1,5 @@
 from .difficulty import Difficulty
-
-LEVEL_MULTIPLIER = {
-            "Easy": 1,
-            "Medium": 2,
-            "Hard": 3,
-            "Very hard": 4
-}
+from task_2_2.scoreboard import LEVEL_MULTIPLIER
 
 class QuizSettings:
     def __init__(self):
