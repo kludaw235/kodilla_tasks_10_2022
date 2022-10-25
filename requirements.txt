@@ -7,3 +7,5 @@ pytest-cov
 jsonify
 pytest-mock
 webtest
+selenium
+webdriver-manager
