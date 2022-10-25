@@ -222,7 +222,7 @@ def new_user():
         # is_taken_name = Users.query.filter(Users.name == user['user_name']).count()
         # is_taken_email = Users.query.filter(Users.email == user['user_email']).count()
         is_taken_name = db_actions.check_name_if_occupied(user['user_name'])
-        is_taken_email = db_actions.check_name_if_occupied(user['user_email'])
+        is_taken_email = db_actions.check_email_if_occupied(user['user_email'])
 
         if user['user_name'] == '':
             message = f"Username cannot be empty"
