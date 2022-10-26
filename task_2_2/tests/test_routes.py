@@ -26,8 +26,8 @@ class TestRegistration:
             assert Users.query.count() == user_count + 1
 
     @pytest.mark.parametrize('name, email', [
-        ("endtest", "endtest@endtest"),
-        ("different_email", "endtest")])
+        ("difftest", "endtest@endtest"),
+        ("endtest", "different_email")])
     def test_name_email_occupied(self, testapp, name, email):
         with app.app_context():
             user_count = Users.query.count()
