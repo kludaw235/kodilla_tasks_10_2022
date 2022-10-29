@@ -2,10 +2,9 @@ flask
 flask_sqlalchemy
 sqlalchemy
 pytest
-pytest-sugar
 pytest-cov
-jsonify
 pytest-mock
+jsonify
 webtest
 selenium
 webdriver-manager
