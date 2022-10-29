@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  quiz_test:
+    build:
+      context: .
+    image: "quiz_test"
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./:/app
+    environment:
+      FLASK_APP: task_2_2/app
+      FLASK_DEBUG: 1
+      FLASK_ENV: development
+      DATABASE_URL: sqlite:////tmp/dev.db
+      SECRET_KEY: development
