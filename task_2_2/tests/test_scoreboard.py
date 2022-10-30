@@ -13,8 +13,7 @@ def no_json_dump(monkeypatch):
 
 @pytest.fixture()
 def scoreboard():
-    return Scoreboard(".task_2_2\\tests\\test_sorted.json")
-
+    return Scoreboard("tests\\test_sorted.json")
 
 def test_json_file_exists(scoreboard):
     scoreboard_path_full = sys.modules[scoreboard.__module__].__file__
