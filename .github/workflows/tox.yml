@@ -3,6 +3,20 @@ name: Run test suite
 on: push
 
 jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        firefox: [ 'latest' ]
+    name: Firefox ${{ matrix.firefox }} sample
+    steps:
+      - name: Setup firefox
+        uses: browser-actions/setup-firefox@latest
+        with:
+          firefox-version: ${{ matrix.firefox }}
+      - run: firefox --version
+
   tox:
     name: Run tox
     runs-on: ubuntu-latest
