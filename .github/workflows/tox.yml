@@ -15,8 +15,7 @@ jobs:
         uses: browser-actions/setup-firefox@latest
         with:
           firefox-version: ${{ matrix.firefox }}
-          run: killall firefox
-
+          run: kill $(pidof firefox)
   tox:
     name: Run tox
     runs-on: ubuntu-latest
