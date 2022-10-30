@@ -10,7 +10,8 @@ from sqlalchemy.orm.exc import UnmappedInstanceError
 from webdriver_manager.firefox import GeckoDriverManager
 import pytest
 
-URL = 'http://127.0.0.1:5000/'
+# URL = 'http://127.0.0.1:5000/'
+URL = 'localhost:5000'
 SERVICE = Service(GeckoDriverManager().install())
 
 

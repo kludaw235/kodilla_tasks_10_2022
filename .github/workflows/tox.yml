@@ -17,7 +17,6 @@ jobs:
           firefox-version: ${{ matrix.firefox }}
           run: |
             firefox --version
-            kill-firefox
 
   tox:
     name: Run tox
