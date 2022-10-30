@@ -13,7 +13,7 @@ LEVEL_MULTIPLIER = {
 
 class Scoreboard():
     def __init__(self, data_file):
-        self.__json_path = os.path.dirname(__file__) + "\\" + data_file
+        self.__json_path = os.path.dirname(__file__) + "/" + data_file
 
     def init_scoreboard(self):
         if not os.path.exists(self.__json_path):
