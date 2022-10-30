@@ -37,6 +37,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions
       - name: Run flask
-        run: flask run --host=0.0.0.0
+        run: flask --app task_2_2/app run
       - name: Test with tox
         run: tox -e func
