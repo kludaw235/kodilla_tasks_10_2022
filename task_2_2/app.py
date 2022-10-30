@@ -16,7 +16,7 @@ def register_extensions(app):
 def create_app():
     app = Flask(__name__)
     app.config.from_pyfile('config.cfg')
-    db_path = os.path.join(os.path.dirname(__file__), 'data\equipment.db')
+    db_path = os.path.join(os.path.dirname(__file__), 'data/equipment.db')
     db_uri = 'sqlite:///{}'.format(db_path)
     app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 
