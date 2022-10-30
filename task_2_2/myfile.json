@@ -1,24 +1,29 @@
 {
     "users": [
         {
+            "name": "admin",
+            "score": 278,
+            "rank": 1
+        },
+        {
             "name": "aa",
             "score": 185,
-            "rank": 1
+            "rank": 2
         },
         {
             "name": "bb",
             "score": 174,
-            "rank": 2
+            "rank": 3
         },
         {
             "name": "izo",
             "score": 157,
-            "rank": 3
+            "rank": 4
         },
         {
-            "name": "admin",
-            "score": 58,
-            "rank": 4
+            "name": "qq",
+            "score": 34,
+            "rank": 5
         }
     ]
 }
