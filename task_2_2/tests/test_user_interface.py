@@ -30,7 +30,7 @@ def clear_user_before_tests():
 @pytest.fixture()
 def browser():
     options = Options()
-    options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
+    # options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
     options.add_argument('--headless')
     driver = webdriver.Firefox(service=SERVICE, options=options)
     driver.implicitly_wait(2)
